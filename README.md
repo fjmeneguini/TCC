@@ -143,24 +143,6 @@ Ou seja, o ML é consumidor da estrutura; a entrega deste TCC é a estrutura.
 
 ---
 
-## Estrutura atual do repositório
-
-- `Documento “Mapeamento do SINASC”.md`
-- `README.md`
-
----
-
 ## Resumo em uma frase
 
 Transformar dados públicos brutos do SINASC/DATASUS em uma base científica pronta para pesquisa, análise estatística e aplicações futuras de ML.
-
----
-
-## Próximos artefatos esperados neste repositório
-
-- Scripts de ingestão automática
-- Pipeline ETL versionado
-- DDL do banco e índices
-- Views científicas documentadas
-- Notebook/relatório oficial de EDA
-- Guia de execução reprodutível
