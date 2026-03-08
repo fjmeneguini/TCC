@@ -6,6 +6,7 @@ import requests
 # Base pública do Portal de Dados Abertos do SUS (S3)
 # Exemplo real: SINASC_2023_csv.zip aparece com essa URL no portal. (2023) :contentReference[oaicite:1]{index=1}
 BASE_S3 = "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv"
+MIN_YEAR = 2013
 
 def download_file(url: str, out_path: Path, timeout: int = 180) -> str:
     out_path.parent.mkdir(parents=True, exist_ok=True)
@@ -39,9 +40,16 @@ def download_file(url: str, out_path: Path, timeout: int = 180) -> str:
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", default="data/raw", help="pasta de saída (default: data/raw)")
-    ap.add_argument("--start-year", type=int, required=True)
+    ap.add_argument("--start-year", type=int, default=MIN_YEAR)
     ap.add_argument("--end-year", type=int, required=True)
     args = ap.parse_args()
+
+    if args.start_year < MIN_YEAR:
+        raise ValueError(f"Ano inicial inválido: {args.start_year}. Use ano >= {MIN_YEAR}.")
+    if args.end_year < MIN_YEAR:
+        raise ValueError(f"Ano final inválido: {args.end_year}. Use ano >= {MIN_YEAR}.")
+    if args.end_year < args.start_year:
+        raise ValueError("Intervalo inválido: --end-year deve ser maior ou igual a --start-year.")
 
     out_dir = Path(args.out)
     out_dir.mkdir(parents=True, exist_ok=True)

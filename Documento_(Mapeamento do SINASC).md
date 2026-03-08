@@ -1,133 +1,108 @@
-# Mapeamento da Base SINASC – Ano 2023
+# Mapeamento da Base SINASC — Recorte 2013 a 2023
 
-## 1. Origem dos Dados
+## 1) Escopo e objetivo
 
-Fonte: Portal Brasileiro de Dados Abertos (dados.gov.br)  
-Conjunto de dados: Sistema de Informação sobre Nascidos Vivos – SINASC  
-Órgão responsável: Ministério da Saúde (DATASUS)  
-Arquivo analisado: Nascidos Vivos – 2023 (formato CSV)
+Este documento consolida o mapeamento técnico da base SINASC no recorte **2013–2023**, cobrindo variáveis, tipos esperados e problemas de qualidade de dados para suportar a etapa ETL e a modelagem relacional.
 
-O arquivo foi importado utilizando Power Query devido ao grande volume de registros, evitando limitações do Excel em relação ao número máximo de linhas.
+## 2) Fontes de referência
 
----
+- Portal de dados públicos (dados.gov.br / OpenDataSUS) para os arquivos anuais.
+- Dicionário/definições do SINASC (DATASUS) como referência semântica dos campos.
+- Evidência estrutural do recorte no projeto:
+	- `data/raw/2013` até `data/raw/2023`
+	- `data/processed/sinasc_harmonized_columns.json` (colunas harmonizadas 2013–2023)
 
-## 2. Estrutura Geral da Base
+## 3) Inventário de variáveis relevantes (2013–2023)
 
-A base do SINASC é composta por variáveis relacionadas a:
+As colunas abaixo foram identificadas na harmonização do recorte 2013–2023.
 
-- Identificação do registro
-- Informações maternas
-- Dados da gestação
-- Dados do parto
-- Informações do recém-nascido
-- Informações administrativas e de sistema
+| Coluna | Tipo esperado | Natureza |
+|---|---|---|
+| CONTADOR | inteiro | identificador técnico |
+| ORIGEM | categórico (código) | origem da informação |
+| CODCART | categórico (código) | cartório |
+| CODMUNCART | inteiro/código IBGE | município do cartório |
+| NUMREGCART | texto | número de registro cartorial |
+| DTREGCART | data (DDMMAAAA) | data de registro em cartório |
+| CODESTAB | inteiro/código CNES | estabelecimento de saúde |
+| CODMUNNASC | inteiro/código IBGE | município de nascimento |
+| LOCNASC | categórico (código) | local de nascimento |
+| IDADEMAE | inteiro | idade materna |
+| ESTCIVMAE | categórico (código) | estado civil materno |
+| ESCMAE | categórico (código) | escolaridade (modelo antigo) |
+| CODOCUPMAE | categórico (código) | ocupação materna |
+| QTDFILVIVO | inteiro | filhos vivos |
+| QTDFILMORT | inteiro | filhos mortos/perdas |
+| CODMUNRES | inteiro/código IBGE | município de residência |
+| CODPAISRES | categórico (código) | país de residência |
+| GRAVIDEZ | categórico (código) | tipo de gravidez |
+| PARTO | categórico (código) | tipo de parto |
+| CONSULTAS | categórico (código) | faixa de consultas pré-natal |
+| DTNASC | data (DDMMAAAA) | data de nascimento |
+| HORANASC | texto/hora | horário de nascimento |
+| SEXO | categórico (código) | sexo do recém-nascido |
+| APGAR1 | inteiro | Apgar 1º minuto |
+| APGAR5 | inteiro | Apgar 5º minuto |
+| RACACORN | categórico (código) | raça/cor do RN |
+| RACACORMAE | categórico (código) | raça/cor da mãe |
+| RACACOR | categórico (código) | raça/cor do RN (variação histórica) |
+| PESO | inteiro | peso ao nascer (gramas) |
+| IDANOMAL | categórico (código) | indicador de anomalia |
+| CODANOMAL | texto/código | código da anomalia |
+| DTCADASTRO | data (DDMMAAAA) | data de cadastro |
+| NUMEROLOTE | inteiro/texto | lote de processamento |
+| VERSAOSIST | texto | versão do sistema |
+| DTRECEBIM | data (DDMMAAAA) | data de recebimento |
+| DTRECORIG | data (DDMMAAAA) | data de recebimento origem |
+| DIFDATA | inteiro | diferença entre datas |
+| NATURALMAE | categórico (código) | naturalidade materna |
+| CODMUNNATU | inteiro/código IBGE | município de naturalidade |
+| CODUFNATU | categórico (UF) | UF de naturalidade |
+| DTNASCMAE | data (DDMMAAAA) | data de nascimento da mãe |
+| QTDGESTANT | inteiro | gestações anteriores |
+| QTDPARTNOR | inteiro | partos vaginais anteriores |
+| QTDPARTCES | inteiro | partos cesáreos anteriores |
+| IDADEPAI | inteiro | idade do pai |
+| DTULTMENST | data (DDMMAAAA) | data da última menstruação |
+| MESPRENAT | inteiro | mês de início do pré-natal |
+| TPAPRESENT | categórico (código) | tipo de apresentação fetal |
+| STTRABPART | categórico (código) | trabalho de parto |
+| STCESPARTO | categórico (código) | cesárea antes do trabalho de parto |
+| TPNASCASSI | categórico (código) | tipo de assistência ao nascimento |
+| STDNEPIDEM | categórico (código) | status de DN |
+| STDNNOVA | categórico (código) | status de DN nova |
+| SERIESCMAE | categórico (código) | série escolar materna |
+| ESCMAEAGR1 | categórico (código) | escolaridade agrupada |
+| SEMAGESTAC | inteiro | semanas de gestação |
+| GESTACAO | categórico (código) | faixa de gestação |
+| TPMETESTIM | categórico (código) | método de estimação |
+| ESCMAE2010 | categórico (código) | escolaridade (modelo 2010+) |
+| DTRECORIGA | data (DDMMAAAA) | data de recebimento origem (variação de nome) |
+| CONSPRENAT | inteiro | número de consultas pré-natal |
+| TPFUNCRESP | categórico (código) | função responsável pela declaração |
+| TPDOCRESP | categórico (código) | tipo de documento do responsável |
+| DTDECLARAC | data (DDMMAAAA) | data de declaração |
+| TPROBSON | categórico (código) | classificação de Robson |
+| PARIDADE | categórico/inteiro | paridade |
+| KOTELCHUCK | categórico (código) | índice de adequação pré-natal |
+| OPORT_DN | categórico (código) | oportunidade da DN |
 
-O conjunto analisado apresenta aproximadamente dezenas de colunas, majoritariamente armazenadas como valores numéricos representando códigos categóricos.
+## 4) Mapeamento de problemas comuns de qualidade
 
----
+Problemas observados e esperados no recorte 2013+:
 
-## 3. Principais Variáveis Identificadas
+- Valores ausentes representados por vazio, `NA`, `N/A`, `NULL`, `IGN`, `IGNORADO`.
+- Códigos de ignorado em variáveis categóricas (ex.: `9`, e em alguns casos `0`).
+- Datas em formato numérico textual `DDMMAAAA` (exigem validação e conversão).
+- Códigos com tamanhos diferentes (municípios e estabelecimento de saúde).
+- Variação histórica de nomes/estrutura de colunas entre anos.
 
-### 3.1 Identificação do Registro
+## 5) Regras técnicas esperadas para ETL (derivadas do mapeamento)
 
-| Coluna       | Descrição                                      |Tipo Esperado |
-|--------------|------------------------------------------------|--------------|
-| CONTADOR     | Identificador do registro                      | Inteiro      |
-| NUMEROLOTE   | Número do lote                                 | Inteiro      |
-| ORIGEM       | Banco de dados de origem                       | Código       |
-| CODESTAB     | Código do estabelecimento (CNES)               | Inteiro      |
-| CODMUNNASC   | Código IBGE do município de nascimento         | Inteiro      |
-| CODMUNRES    | Código IBGE do município de residência         | Inteiro      |
-
----
-
-### 3.2 Informações da Mãe
-
-| Coluna       | Descrição                                     |  Tipo   |
-|--------------|-----------------------------------------------|---------|
-| IDADEMAE     | Idade da mãe                                  | Inteiro |
-| ESTCIVMAE    | Situação conjugal da mãe                      | Código  |
-| ESCMAE       | Escolaridade (modelo antigo)                  | Código  |
-| ESCMAE2010   | Escolaridade (modelo atualizado)              | Código  |
-| RACACORMAE   | Raça/cor da mãe                               | Código  |
-| QTDFILVIVO   | Número de filhos vivos                        | Inteiro |
-| QTDFILMORT   | Número de perdas fetais e abortos             | Inteiro |
-| QTDGESTANT   | Número de gestações anteriores                | Inteiro |
-| QTDPARTNOR   | Número de partos vaginais                     | Inteiro |
-| QTDPARTCES   | Número de partos cesáreos                     | Inteiro |
-| IDADEPAI     | Idade do pai                                  | Inteiro |
-
----
-
-### 3.3 Dados da Gestação e Parto
-
-| Coluna       | Descrição                                     |  Tipo  |
-|--------------|-----------------------------------------------|--------|
-| GESTACAO     | Faixa de semanas de gestação                  | Código |
-| SEMAGESTAC   | Número de semanas de gestação                 | Inteiro|
-| GRAVIDEZ     | Tipo de gravidez                              | Código |
-| PARTO        | Tipo de parto                                 | Código |
-| TPAPRESENT   | Tipo de apresentação do recém-nascido         | Código |
-| STTRABPART   | Trabalho de parto induzido                    | Código |
-| STCESPARTO   | Cesárea antes do trabalho de parto            | Código |
-
----
-
-### 3.4 Dados do Recém-Nascido
-
-| Coluna       | Descrição                                     |   Tipo  |
-|--------------|-----------------------------------------------|---------|
-| SEXO         | Sexo do recém-nascido                         |  Código |
-| PESO         | Peso ao nascer (gramas)                       | Inteiro |
-| APGAR1       | Índice Apgar no 1º minuto                     | Inteiro |
-| APGAR5       | Índice Apgar no 5º minuto                     | Inteiro |
-| RACACOR      | Raça/cor do recém-nascido                     |  Código |
-| IDANOMAL     | Presença de anomalia                          |  Código |
-| CODANOMAL    | Código da anomalia (CID-10)                   |  Texto  |
-
----
-
-### 3.5 Informações de Pré-Natal
-
-| Coluna       | Descrição                                     |   Tipo  |
-|--------------|-----------------------------------------------|---------|
-| CONSULTAS    | Categoria de número de consultas              |  Código |
-| CONSPRENAT   | Número real de consultas                      | Inteiro |
-| MESPRENAT    | Mês de início do pré-natal                    | Inteiro |
-| KOTELCHUCK   | Índice de adequação da assistência pré-natal  |  Código |
-
----
-
-## 4. Tipos de Dados Observados
-
-A maioria das variáveis é armazenada como número inteiro, mesmo quando representa categorias.  
-Alguns campos utilizam códigos padronizados (ex: 1, 2, 3, 9), onde:
-
-- 9 geralmente representa “Ignorado”
-- 0 pode representar ausência ou categoria específica dependendo do campo
-
-Campos de data (DTNASC, DTCADASTRO, DTDECLARAC, etc.) estão armazenados como valores numéricos no formato DDMMYYYY, exigindo conversão no processo de ETL.
-
----
-
-## 5. Problemas Identificados
-
-Durante a análise inicial foi observado:
-
-- Uso de códigos numéricos para representar categorias
-- Presença de códigos “9” ou “0” indicando valores ignorados
-- Datas armazenadas como inteiros
-- Possível inconsistência de tipos detectados automaticamente pelo Excel/Power Query
-- Mudanças estruturais ao longo dos anos conforme descrito no dicionário
-
----
-
-## 6. Considerações para a Próxima Fase (ETL)
-
-Na etapa de ETL será necessário:
-
-- Converter datas para formato padrão
-- Tratar códigos de valores ignorados
-- Padronizar variáveis categóricas
-- Garantir consistência entre anos diferentes
-- Definir tipos corretos para modelagem no banco de dados
+- Padronizar nomes de coluna em uppercase.
+- Harmonizar colunas por união dos cabeçalhos do recorte 2013–2023.
+- Normalizar município para 6 dígitos (`CODMUN*`) e enriquecer com referência IBGE.
+- Normalizar `CODESTAB` para 7 dígitos e validar consistência.
+- Converter datas para formato ISO (`AAAA-MM-DD`) quando válidas.
+- Converter métricas numéricas (idade, peso, apgar, consultas) para inteiro válido.
+- Manter tabela de categorias para variáveis codificadas (sexo, raça/cor, parto, gestação).

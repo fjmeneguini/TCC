@@ -1,0 +1,21 @@
+variable,code,label,is_missing
+SEXO,0,Ignorado,1
+SEXO,1,Masculino,0
+SEXO,2,Feminino,0
+SEXO,9,Ignorado,1
+RACACOR,1,Branca,0
+RACACOR,2,Preta,0
+RACACOR,3,Amarela,0
+RACACOR,4,Parda,0
+RACACOR,5,Indígena,0
+RACACOR,9,Ignorado,1
+PARTO,1,Vaginal,0
+PARTO,2,Cesáreo,0
+PARTO,9,Ignorado,1
+GESTACAO,1,Menos de 22 semanas,0
+GESTACAO,2,22 a 27 semanas,0
+GESTACAO,3,28 a 31 semanas,0
+GESTACAO,4,32 a 36 semanas,0
+GESTACAO,5,37 a 41 semanas,0
+GESTACAO,6,42 semanas e mais,0
+GESTACAO,9,Ignorado,1

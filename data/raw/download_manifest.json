@@ -1,0 +1,73 @@
+{
+  "source": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv",
+  "start_year": 2013,
+  "end_year": 2023,
+  "files": [
+    {
+      "year": 2013,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2013_csv.zip",
+      "saved_as": "data\\raw\\2013\\SINASC_2013_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2014,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2014_csv.zip",
+      "saved_as": "data\\raw\\2014\\SINASC_2014_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2015,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2015_csv.zip",
+      "saved_as": "data\\raw\\2015\\SINASC_2015_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2016,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2016_csv.zip",
+      "saved_as": "data\\raw\\2016\\SINASC_2016_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2017,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2017_csv.zip",
+      "saved_as": "data\\raw\\2017\\SINASC_2017_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2018,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2018_csv.zip",
+      "saved_as": "data\\raw\\2018\\SINASC_2018_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2019,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2019_csv.zip",
+      "saved_as": "data\\raw\\2019\\SINASC_2019_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2020,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2020_csv.zip",
+      "saved_as": "data\\raw\\2020\\SINASC_2020_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2021,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2021_csv.zip",
+      "saved_as": "data\\raw\\2021\\SINASC_2021_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2022,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2022_csv.zip",
+      "saved_as": "data\\raw\\2022\\SINASC_2022_csv.zip",
+      "status": "skip"
+    },
+    {
+      "year": 2023,
+      "url": "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv/SINASC_2023_csv.zip",
+      "saved_as": "data\\raw\\2023\\SINASC_2023_csv.zip",
+      "status": "skip"
+    }
+  ]
+}

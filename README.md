@@ -20,6 +20,8 @@ Este projeto tem como foco **engenharia de dados aplicada à saúde pública**, 
 
 O objetivo central **não é desenvolver modelos de Machine Learning**, e sim entregar a base estrutural que permite pesquisas confiáveis, rastreáveis e comparáveis ao longo do tempo.
 
+**Recorte temporal vigente do projeto:** dados do SINASC de **2013 em diante**.
+
 Em resumo, o trabalho propõe:
 
 - Download automatizado dos dados públicos do SINASC
