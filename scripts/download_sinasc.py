@@ -4,7 +4,6 @@ from pathlib import Path
 import requests
 
 # Base pública do Portal de Dados Abertos do SUS (S3)
-# Exemplo real: SINASC_2023_csv.zip aparece com essa URL no portal. (2023) :contentReference[oaicite:1]{index=1}
 BASE_S3 = "https://s3.sa-east-1.amazonaws.com/ckan.saude.gov.br/SINASC/csv"
 MIN_YEAR = 2013
 
