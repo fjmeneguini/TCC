@@ -5,7 +5,7 @@
 
 ---
 
-## Arquitetura de Banco de Dados e Pipeline Reprodutível de Engenharia de Dados para Disponibilização Científica das Bases Públicas do SINASC (DATASUS)
+## MODELAGEM DE DADOS RELACIONAL DOS MICRODADOS DO SINASC COMO FERRAMENTA DE SUPORTE PARA ANÁLISE DE INDICADORES
 
 **Autor:** Francisco José da Silva Meneguini  
 **Orientador:** Prof. Carlos Eduardo Beluzo  
@@ -142,9 +142,3 @@ A contribuição deste projeto é construir a **infraestrutura de dados** que vi
 - Governança de qualidade
 
 Ou seja, o ML é consumidor da estrutura; a entrega deste TCC é a estrutura.
-
----
-
-## Resumo em uma frase
-
-Transformar dados públicos brutos do SINASC/DATASUS em uma base científica pronta para pesquisa, análise estatística e aplicações futuras de ML.
